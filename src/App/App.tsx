@@ -17,7 +17,9 @@ const Navbar = () => (
       <ul>
         <li><Link to="/"><p>Home</p></Link></li>
         <li><Link to="/about"><p>About</p></Link></li>
+        <li><Link to="/blog"><p>Work</p></Link></li>
         <li><Link to="/blog"><p>Blog</p></Link></li>
+        <div className="underbar"></div>
       </ul>
     </nav>
     <p className="title">

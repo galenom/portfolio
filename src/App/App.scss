@@ -1,5 +1,7 @@
 @import '../styles/mixins';
 
+$nav-width: 140px;
+
 header {
   @include screen_padding;
   grid-area: header;
@@ -8,7 +10,7 @@ header {
   grid-template-areas: "navigation title";
   background-color: #fff;
   font-size: 2.8rem;
-  box-shadow: 0 10px 10px -10px black; // 5c2b84;
+  box-shadow: 0 10px 10px -10px black;
 
   position: sticky;
   top: 0;
@@ -21,14 +23,51 @@ header {
       display: flex;
       align-items: center;
       height: 100%;
+      position: relative;
 
       & > li {
         flex: 1;
+        transition: 0.5s ease;
+        max-width: $nav-width;
+
         & > a {
           text-decoration: none;
           color: #909090;
           font-weight: 600;
         }
+
+        &:hover > a {
+          color: #5c2b84
+        }
+
+        &:nth-of-type(1):hover ~ .underbar{
+          left: 0;
+          width: $nav-width - 15px;
+        }
+
+        &:nth-of-type(2):hover ~ .underbar{
+          left: $nav-width;
+          width: $nav-width - 15px;
+        }
+
+        &:nth-of-type(3):hover ~ .underbar{
+          left: $nav-width * 2;
+          width: $nav-width - 15px;
+        }
+
+        &:nth-of-type(4):hover ~ .underbar{
+          left: $nav-width * 3;
+          width: $nav-width - 15px;
+        }
+      }
+
+      & > .underbar {
+        position: absolute;
+        bottom: 0;
+        height: 10px;
+        background-color: #5c2b84 ;
+        width: 0;
+        transition: 0.5s ease;
       }
     }
   }
