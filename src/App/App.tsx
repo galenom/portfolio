@@ -15,14 +15,14 @@ const Navbar = () => (
   <>
     <nav>
       <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/blog">Blog</Link></li>
+        <li><Link to="/"><p>Home</p></Link></li>
+        <li><Link to="/about"><p>About</p></Link></li>
+        <li><Link to="/blog"><p>Blog</p></Link></li>
       </ul>
     </nav>
-    <span className="title">
-      <p>MARIO GALENO</p>
-    </span>
+    <p className="title">
+      MARIO GALENO
+    </p>
   </>
 );
 
@@ -47,7 +47,7 @@ const Content = () => (
 
 const Footer = () => (
   <footer>
-    <p>Mario Galeno <span>&copy;2019</span></p>
+    <p className='footer'>Mario Galeno <span>&copy;2019</span></p>
   </footer>
 )
 

@@ -7,6 +7,7 @@ header {
   grid-template-columns: 2fr 1.5fr;
   grid-template-areas: "navigation title";
   background-color: #fff;
+  font-size: 2.8rem;
   box-shadow: 0 10px 10px -10px black; // 5c2b84;
 
   position: sticky;
@@ -33,6 +34,7 @@ header {
   }
 
   & > .title {
+    font-family: 'Nova Mono', monospace;
     grid-area: title;
     text-align: right;
     font-weight: 900;
@@ -49,4 +51,6 @@ footer {
   grid-area: footer;
   display: flex;
   justify-content: center;
+
+  font-size: 2rem;
 }
