@@ -30,17 +30,8 @@ const Content = () => (
   <main>
     <Switch>
       <Route path="/" exact component={() => (<h1>Home</h1>)} />
-      <Route path="/about" exact component={() => (
-        <div>
-          <h1>dd</h1>
-          <h1>about</h1>
-          <h1>about</h1>
-          <h1>about</h1>
-          <h1>about</h1>
-          <h1>about</h1>
-        </div>
-      )} />
-      <Route path="/blog" exact component={() => (<h1>blog</h1>)} />
+      <Route path="/about" exact component={() => (<h1>About</h1>)} />
+      <Route path="/blog" exact component={() => (<h1>Blog</h1>)} />
     </Switch>
   </main>
 )
