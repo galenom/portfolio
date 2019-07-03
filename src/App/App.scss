@@ -36,7 +36,8 @@ header {
           font-weight: 600;
         }
 
-        &:hover > a {
+        &:hover > a,
+        & > a.active-link {
           color: #5c2b84
         }
 

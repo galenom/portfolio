@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
@@ -15,10 +15,10 @@ const Navbar = () => (
   <>
     <nav>
       <ul>
-        <li><Link to="/"><p>Home</p></Link></li>
-        <li><Link to="/about"><p>About</p></Link></li>
-        <li><Link to="/blog"><p>Work</p></Link></li>
-        <li><Link to="/blog"><p>Blog</p></Link></li>
+        <li><NavLink exact to="/" activeClassName='active-link'><p>Home</p></NavLink></li>
+        <li><NavLink to="/about" activeClassName='active-link'><p>About</p></NavLink></li>
+        <li><NavLink to="/work" activeClassName='active-link'><p>Work</p></NavLink></li>
+        <li><NavLink to="/blog" activeClassName='active-link'><p>Blog</p></NavLink></li>
         <div className="underbar"></div>
       </ul>
     </nav>
