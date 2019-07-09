@@ -5,6 +5,7 @@ import { Dispatch } from 'redux';
 
 import './App.scss';
 import { LANDING, SIGN_UP, SIGN_IN, HOME } from '../constants/routes';
+import SignUpPage from '../components/SignUpPage/SignUpPage';
 
 const Header = () => (
   <header>
@@ -33,7 +34,7 @@ const Content = () => (
   <main>
     <Switch>
       <Route path={LANDING} exact component={() => (<h1>Landing</h1>)} />
-      <Route path={SIGN_UP} exact component={() => (<h1>Sign Up</h1>)} />
+      <Route path={SIGN_UP} exact component={() => (<SignUpPage />)} />
       <Route path={SIGN_IN} exact component={() => (<h1>Sign In</h1>)} />
       <Route path={HOME} exact component={() => (<h1>Home</h1>)} />
     </Switch>
