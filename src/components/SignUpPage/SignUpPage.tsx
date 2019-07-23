@@ -1,19 +1,17 @@
 import React, { FormEvent, ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Firebase, { FirebaseContext } from '../Firebase';
+import Firebase, { withFirebase } from '../Firebase';
 import { SIGN_UP } from '../../constants/routes';
 
 const SignUpPage = () => (
   <>
     <h1>Sign Up</h1>
-    <FirebaseContext.Consumer>
-      {firebase => !!firebase && <SignUpForm firebase={firebase} />}
-    </FirebaseContext.Consumer>
+    <SignUpForm />
   </>
 )
 
-const SignUpForm = (props: { firebase: Firebase }) => {
+const SignUpFormBase = (props: { firebase: Firebase }) => {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -35,11 +33,7 @@ const SignUpForm = (props: { firebase: Firebase }) => {
     props.firebase
       .doCreateUserWithEmailAndPassword({ email, password: passwordOne })
       .then( () => {
-        setUsername('')
-        setEmail('')
-        setPasswordOne('')
-        setPasswordTwo('')
-        setError(null);
+        setInitialState();
       })
       .catch(error => {
         setError(error);
@@ -59,6 +53,13 @@ const SignUpForm = (props: { firebase: Firebase }) => {
     email === '' ||
     username === '';
 
+  const setInitialState = () => {
+    setUsername('');
+    setEmail('');
+    setPasswordOne('');
+    setPasswordTwo('');
+    setError(null);
+  }
   return (
     <form onSubmit={onSubmit}>
       <input
@@ -96,6 +97,8 @@ const SignUpForm = (props: { firebase: Firebase }) => {
   )
 }
 
+const SignUpForm = withFirebase(SignUpFormBase);
+
 const SignUpLink = () => (
   <p>
     Don't have an account? <Link to={SIGN_UP} />
@@ -104,4 +107,4 @@ const SignUpLink = () => (
 
 export default SignUpPage;
 
-export { SignUpForm, SignUpLink };
+export { SignUpFormBase, SignUpLink };

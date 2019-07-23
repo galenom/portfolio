@@ -47,7 +47,7 @@ const Footer = () => (
   </footer>
 )
 
-const App = () => {
+export const App = () => {
   return (
     <Router>
       <Header />

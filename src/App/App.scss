@@ -1,21 +1,21 @@
 @import '../styles/mixins';
 
-$nav-width: 140px;
+$nav-link-width: 140px;
 
 header {
   @include screen_padding;
   grid-area: header;
-  display: grid;
-  grid-template-columns: 2fr 1.5fr;
-  grid-template-areas: "navigation title";
+  display: flex;
   background-color: #fff;
   font-size: 2.8rem;
-  box-shadow: 0 10px 10px -10px black;
+  box-shadow: 0 10px 10px -10px rgba(0,0,0, 0.25);
 
   position: sticky;
   top: 0;
 
   & > nav {
+    flex: 2;
+
     & > ul {
       list-style: none;
       padding: 0;
@@ -28,7 +28,8 @@ header {
       & > li {
         flex: 1;
         transition: 0.5s ease;
-        max-width: $nav-width;
+        max-width: $nav-link-width;
+        min-width: $nav-link-width;
 
         & > a {
           text-decoration: none;
@@ -43,22 +44,22 @@ header {
 
         &:nth-of-type(1):hover ~ .underbar{
           left: 0;
-          width: $nav-width - 15px;
+          width: $nav-link-width - 15px;
         }
 
         &:nth-of-type(2):hover ~ .underbar{
-          left: $nav-width;
-          width: $nav-width - 15px;
+          left: $nav-link-width;
+          width: $nav-link-width - 15px;
         }
 
         &:nth-of-type(3):hover ~ .underbar{
-          left: $nav-width * 2;
-          width: $nav-width - 15px;
+          left: $nav-link-width * 2;
+          width: $nav-link-width - 15px;
         }
 
         &:nth-of-type(4):hover ~ .underbar{
-          left: $nav-width * 3;
-          width: $nav-width - 15px;
+          left: $nav-link-width * 3;
+          width: $nav-link-width - 15px;
         }
       }
 
@@ -74,8 +75,8 @@ header {
   }
 
   & > .title {
+    flex: 1.5;
     font-family: 'Nova Mono', monospace;
-    grid-area: title;
     text-align: right;
     font-weight: 900;
   }
