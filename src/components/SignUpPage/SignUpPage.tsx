@@ -1,8 +1,10 @@
 import React, { FormEvent, ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { compose, withProps } from 'recompose';
+import { History } from 'history';
 
 import Firebase, { withFirebase } from '../Firebase';
-import { SIGN_UP } from '../../constants/routes';
+import { SIGN_UP, HOME } from '../../constants/routes';
 
 const SignUpPage = () => (
   <>
@@ -11,7 +13,7 @@ const SignUpPage = () => (
   </>
 )
 
-const SignUpFormBase = (props: { firebase: Firebase }) => {
+const SignUpFormBase = ({ firebase, history }: { firebase: Firebase, history: History }) => {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -30,10 +32,11 @@ const SignUpFormBase = (props: { firebase: Firebase }) => {
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    props.firebase
+    firebase
       .doCreateUserWithEmailAndPassword({ email, password: passwordOne })
       .then( () => {
         setInitialState();
+        history.push(HOME);
       })
       .catch(error => {
         setError(error);
@@ -97,13 +100,17 @@ const SignUpFormBase = (props: { firebase: Firebase }) => {
   )
 }
 
-const SignUpForm = withFirebase(SignUpFormBase);
+const SignUpForm = compose(
+  withRouter,
+  withFirebase,
+  // @ts-ignore
+)(SignUpFormBase);
 
 const SignUpLink = () => (
   <p>
     Don't have an account? <Link to={SIGN_UP} />
   </p>
-)
+);
 
 export default SignUpPage;
 
