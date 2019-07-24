@@ -1,35 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, NavLink, Switch } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import './App.scss';
-import { LANDING, SIGN_UP, SIGN_IN, HOME } from '../constants/routes';
+
+import Navigation from './Navigation';
 import SignInPage from '../components/SignInPage';
 import SignUpPage from '../components/SignUpPage';
+import { LANDING, SIGN_UP, SIGN_IN, HOME } from '../constants/routes';
 
 const Header = () => (
   <header>
-    <Navbar />
+    <Navigation authUser={false}/>
   </header>
 )
-
-const Navbar = () => (
-  <>
-    <nav>
-      <ul>
-        <li><NavLink exact to={LANDING} activeClassName='active-link'><p>Landing</p></NavLink></li>
-        <li><NavLink to={SIGN_UP} activeClassName='active-link'><p>Sign Up</p></NavLink></li>
-        <li><NavLink to={SIGN_IN} activeClassName='active-link'><p>Sign In</p></NavLink></li>
-        <li><NavLink to={HOME} activeClassName='active-link'><p>Home</p></NavLink></li>
-        <div className="underbar"></div>
-      </ul>
-    </nav>
-    <p className="title">
-      React Magic
-    </p>
-  </>
-);
 
 const Content = () => (
   <main>
@@ -49,6 +34,8 @@ const Footer = () => (
 )
 
 export const App = () => {
+  const [authUser, setAuthUser] = useState(null);
+
   return (
     <Router>
       <Header />

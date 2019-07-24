@@ -1,6 +1,6 @@
 import React, { FormEvent, ChangeEvent, useState } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { compose, withProps } from 'recompose';
+import { compose } from 'recompose';
 import { History } from 'history';
 
 import Firebase, { withFirebase } from '../Firebase';
