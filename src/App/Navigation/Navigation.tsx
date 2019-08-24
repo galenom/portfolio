@@ -5,8 +5,9 @@ import './Navigation.scss';
 
 import SignOutButton from '../../components/SignOut';
 import { LANDING, SIGN_UP, SIGN_IN, HOME } from '../../constants/routes';
+import { User } from 'firebase';
 
-export const Navigation = ({ authUser }: { authUser: boolean }) => {
+export const Navigation = ({ authUser }: { authUser?: User }) => {
   const nav = authUser ? <NavigationAuthenticated /> : <NavigationPreAuth />;
   return (
     <>

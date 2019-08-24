@@ -10,6 +10,8 @@ import Firebase, { FirebaseContext } from './components/Firebase'
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
     <Provider store={configureStore()}>
+      {/* 
+        // @ts-ignore */}
       <App />
     </Provider>
   </FirebaseContext.Provider>,

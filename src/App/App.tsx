@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { Dispatch, compose } from 'redux';
 
 import './App.scss';
 
@@ -9,10 +9,12 @@ import Navigation from './Navigation';
 import SignInPage from '../components/SignInPage';
 import SignUpPage from '../components/SignUpPage';
 import { LANDING, SIGN_UP, SIGN_IN, HOME } from '../constants/routes';
+import Firebase, { withFirebase } from '../components/Firebase';
+import { User } from 'firebase';
 
-const Header = () => (
+const Header = ({ authUser }: { authUser?: User }) => (
   <header>
-    <Navigation authUser={false}/>
+    <Navigation authUser={authUser}/>
   </header>
 )
 
@@ -33,12 +35,31 @@ const Footer = () => (
   </footer>
 )
 
-export const App = () => {
-  const [authUser, setAuthUser] = useState(null);
+export const App = ({ firebase }: { firebase: Firebase }) => {
+  const [authUserDetails, setAuthUserDetails] = useState<User | undefined>(undefined);
+  const [listener] = useState<(() => void) | undefined>(undefined)
+
+  useEffect(() => {
+    if (!listener) {
+      const unsuscribe = firebase.auth.onAuthStateChanged((authUser) => {
+        let userDetails = authUser || undefined;
+        setAuthUserDetails(userDetails);
+      })
+
+      // TODO: Why does this break everything
+      // setListener(() => {
+      //   unsuscribe();
+      // });
+
+      return () => {
+        unsuscribe();
+      };
+    }
+  }, [authUserDetails, firebase.auth, listener])
 
   return (
     <Router>
-      <Header />
+      <Header authUser={authUserDetails} />
       <Content />
       <Footer />
     </Router>
@@ -49,4 +70,7 @@ const mapStateToProps = (state: any) => ({})
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({})
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default compose(
+  withFirebase,
+  connect(mapStateToProps, mapDispatchToProps)
+)(App);
